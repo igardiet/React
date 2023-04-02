@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./styles.css";
+// import "./styles.css";
 
 export const FirstApp = ({
   title,
