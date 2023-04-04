@@ -18,6 +18,17 @@ input {
   width: 100%;
 }
 
+button {
+  background-color: red;
+  border: 1px solid red;
+  border-radius: 20px;
+  color: black;
+  font-size: 1.2rem;
+  outline: none;
+  padding: 1%;
+  width: 20%;
+}
+
 h2 {
   font-size: 1.5rem;
 }
