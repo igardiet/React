@@ -1,7 +1,8 @@
 const { MongoClient } = require('mongodb');
 
 let dbConnection;
-const url = 'mongodb+srv://atticus:<password>@mongoscratch.hwsqiuh.mongodb.net/?retryWrites=true&w=majority'
+const url =
+  'mongodb+srv://atticus:<password>@mongoscratch.hwsqiuh.mongodb.net/?retryWrites=true&w=majority';
 
 module.exports = {
   connectToDb: (cb) => {

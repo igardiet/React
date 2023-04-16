@@ -23,10 +23,9 @@ connectToDb((err) => {
 
 // routes
 app.get('/books', (req, res) => {
-
-// current page
-const page = req.query.p || 0
-const booksPerPage = 3
+  // current page
+  const page = req.query.p || 0;
+  const booksPerPage = 3;
 
   let books = [];
 
@@ -82,15 +81,15 @@ app.delete('/books/:id', (req, res) => {
           res.status(500).json({ error: 'Document could not be deleted!' });
         })
     : res.status(500).json({ error: 'Document id not valid!' });
-})
+});
 
 app.patch('/books/:id', (req, res) => {
-  const updates = req.body
+  const updates = req.body;
 
   ObjectId.isValid(req.params.id)
     ? db
         .collection('books')
-        .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
+        .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
         .then((result) => {
           res.status(200).json(result);
         })
@@ -98,5 +97,4 @@ app.patch('/books/:id', (req, res) => {
           res.status(500).json({ error: 'Document could not be deleted!' });
         })
     : res.status(500).json({ error: 'Document id not valid!' });
-
-})
+});
