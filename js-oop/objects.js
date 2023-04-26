@@ -5,9 +5,11 @@
 // 3. calls the constructor method
 
 class Person {
-    constructor(){
-        
+    constructor(name, surname){
+        this.name = name
+        this.surname = surname
     }
 }
 
-const firstPerson = new Person()
+const firstPerson = new Person('Bob', 'Dylan')
+const secondPerson = new Person('Lucky', 'Strike')
