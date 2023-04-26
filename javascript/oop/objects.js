@@ -4,7 +4,7 @@
 // 2. set the value of 'this' to be the new empty object
 // 3. calls the constructor method
 
-class Person {
+class User {
   constructor(name, surname) {
     this.name = name;
     this.surname = surname;
@@ -25,7 +25,22 @@ class Person {
   }
 }
 
-const firstPerson = new Person('Bob', 'Dylan');
-const secondPerson = new Person('Lucky', 'Strike');
+class Admin extends User {
+    deleteUser(user) {
+        users = users.filter(u => {
+            return u.name != user.name
+        })
+    }
+}
 
-firstPerson.login().updateNumber().updateNumber().logout();
+const firstUser = new User('Bob', 'Dylan');
+const secondUser = new User('Lucky', 'Strike');
+const admin = new Admin('John', 'Lennon')
+
+let users = [firstUser, secondUser, admin]
+
+admin.deleteUser(firstUser)
+
+console.log(users);
+
+// firstUser.login().updateNumber().updateNumber().logout();
