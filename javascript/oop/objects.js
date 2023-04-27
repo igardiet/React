@@ -26,21 +26,36 @@ class User {
 }
 
 class Admin extends User {
-    deleteUser(user) {
-        users = users.filter(u => {
-            return u.name != user.name
-        })
-    }
+  deleteUser(user) {
+    users = users.filter((u) => {
+      return u.name != user.name;
+    });
+  }
 }
 
 const firstUser = new User('Bob', 'Dylan');
 const secondUser = new User('Lucky', 'Strike');
-const admin = new Admin('John', 'Lennon')
+const admin = new Admin('John', 'Lennon');
 
-let users = [firstUser, secondUser, admin]
+let users = [firstUser, secondUser, admin];
 
-admin.deleteUser(firstUser)
+admin.deleteUser(firstUser);
 
 console.log(users);
 
 // firstUser.login().updateNumber().updateNumber().logout();
+
+/////
+
+function Animal(species, breed) {
+  this.species = species;
+  this.breed = breed;
+  this.adult = false;
+  this.alive = function () {
+    console.log(this.species, 'Is an animal');
+  };
+}
+const animalOne = new Animal('Feline', 'Lion');
+const animalTwo = new Animal('Canine', 'Wolf');
+console.log(animalOne);
+animalTwo.alive();
