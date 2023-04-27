@@ -45,17 +45,26 @@ console.log(users);
 
 // firstUser.login().updateNumber().updateNumber().logout();
 
-/////
+///// constructor
 
 function Animal(species, breed) {
   this.species = species;
   this.breed = breed;
   this.adult = false;
-  this.alive = function () {
-    console.log(this.species, 'Is an animal');
-  };
 }
+
+Animal.prototype.awake = function () {
+  this.adult = true;
+  console.log(this.species, 'Is awake');
+};
+
+Animal.prototype.asleep = function () {
+  this.adult = false;
+  console.log(this.species, 'Is asleep');
+};
+
 const animalOne = new Animal('Feline', 'Lion');
 const animalTwo = new Animal('Canine', 'Wolf');
+
 console.log(animalOne);
-animalTwo.alive();
+animalTwo.awake();
