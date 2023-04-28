@@ -4,67 +4,80 @@
 // 2. set the value of 'this' to be the new empty object
 // 3. calls the constructor method
 
-class User {
-  constructor(name, surname) {
-    this.name = name;
-    this.surname = surname;
-    this.number = 0;
-  }
-  login() {
-    console.log(this.name, 'Has logged in!');
-    return this;
-  }
-  logout() {
-    console.log(this.name, 'Has logged out!');
-    return this;
-  }
-  updateNumber() {
-    this.number++;
-    console.log(this.name, 'number is now', this.number);
-    return this;
-  }
-}
+// class User {
+//   constructor(name, surname) {
+//     this.name = name;
+//     this.surname = surname;
+//     this.number = 0;
+//   }
+//   login() {
+//     console.log(this.name, 'Has logged in!');
+//     return this;
+//   }
+//   logout() {
+//     console.log(this.name, 'Has logged out!');
+//     return this;
+//   }
+//   updateNumber() {
+//     this.number++;
+//     console.log(this.name, 'number is now', this.number);
+//     return this;
+//   }
+// }
 
-class Admin extends User {
-  deleteUser(user) {
-    users = users.filter((u) => {
-      return u.name != user.name;
-    });
-  }
-}
+// class Admin extends User {
+//   deleteUser(user) {
+//     users = users.filter((u) => {
+//       return u.name != user.name;
+//     });
+//   }
+// }
 
-const firstUser = new User('Bob', 'Dylan');
-const secondUser = new User('Lucky', 'Strike');
-const admin = new Admin('John', 'Lennon');
+// const firstUser = new User('Bob', 'Dylan');
+// const secondUser = new User('Lucky', 'Strike');
+// const admin = new Admin('John', 'Lennon');
 
-let users = [firstUser, secondUser, admin];
+// let users = [firstUser, secondUser, admin];
 
-admin.deleteUser(firstUser);
+// admin.deleteUser(firstUser);
 
-console.log(users);
+// console.log(users);
 
 // firstUser.login().updateNumber().updateNumber().logout();
 
 ///// constructor
 
-function Animal(species, breed) {
-  this.species = species;
-  this.breed = breed;
-  this.adult = false;
+function User(email, name) {
+  this.email = email;
+  this.name = name;
+  this.online = false;
 }
 
-Animal.prototype.awake = function () {
-  this.adult = true;
-  console.log(this.species, 'Is awake');
+User.prototype.login = function () {
+  this.online = true;
+  console.log(this.email, 'Has logged in!');
 };
 
-Animal.prototype.asleep = function () {
-  this.adult = false;
-  console.log(this.species, 'Is asleep');
+User.prototype.logout = function () {
+  this.online = false;
+  console.log(this.email, 'Has logged out!');
 };
 
-const animalOne = new Animal('Feline', 'Lion');
-const animalTwo = new Animal('Canine', 'Wolf');
+function Admin(...args) {
+  User.apply(this, args);
+  this.role = 'Admin';
+}
 
-console.log(animalOne);
-animalTwo.awake();
+Admin.prototye = Object.create(User.prototype);
+Admin.prototye.deleteUser = function (u) {
+  users = users.filter((user) => {
+    return user.email != u.email;
+  });
+};
+
+const userOne = new User('one@gmail.com', 'Leon');
+const userTwo = new User('two@gmail.com', 'Wolf');
+const admin = new Admin('admin@gmail.com', 'Paul');
+const users = [userOne, userTwo, admin];
+
+console.log(admin);
