@@ -1,6 +1,7 @@
 // import { Component } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { useContext } from 'react';
 
 // OLD CLASS COMPONENT VERSION
 // export default class Navbar extends Component {
