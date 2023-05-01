@@ -1,4 +1,7 @@
-import { Component, useContext } from 'react';
+import {
+  // Component,
+  useContext,
+} from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 // OLD CLASS COMPONENT VERSION
@@ -22,7 +25,7 @@ import { ThemeContext } from '../contexts/ThemeContext';
 //   }
 // }
 
-// NEW COMPONENTS VERSION
+// USECONTEXT INSIDE FUNCTIONAL COMPONENTS
 export const BookList = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
