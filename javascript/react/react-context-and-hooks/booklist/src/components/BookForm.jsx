@@ -1,3 +1,6 @@
+import { useContext, useState } from 'react';
+import { BookContext } from '../contexts/BookContext';
+
 export const BookForm = () => {
   const { addBook } = useContext(BookContext);
   const [title, setTitle] = useState('');
@@ -21,7 +24,7 @@ export const BookForm = () => {
         type='text'
         placeholder='Author'
         value={author}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setAuthor(e.target.value)}
         required
       />
       <input type='submit' value='Add book!' />
