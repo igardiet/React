@@ -12,6 +12,17 @@ describe('Tests in <AddCategory />', () => {
     fireEvent.input(input, { target: { value: 'Naruto' } });
 
     expect(input.value).toBe('Naruto');
-    // screen.debug()
+  });
+  test('It must call onNewCategory if the input has a value', () => {
+    const inputValue = 'Naruto';
+
+    render(<AddCategory onNewCategory={() => {}} />);
+
+    const input = screen.getByRole('textbox');
+    const form = screen.getByRole('form');
+
+    fireEvent.input(input, { target: { value: inputValue } });
+    fireEvent.submit(form);
+    expect(input.value).toBe('');
   });
 });
