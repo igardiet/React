@@ -20,7 +20,7 @@ export const MemoHook = () => {
         Counter: <small>{counter}</small>
       </h1>
       <hr />
-      <h4>{memorizedValuedd}</h4>
+      <h4>{memorizedValue}</h4>
       <button className='btn btn-primary' onClick={() => increment()}>
         +1
       </button>
