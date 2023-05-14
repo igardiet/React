@@ -11,6 +11,7 @@ import './index.css';
 // import { Layout } from './useLayoutEffect/Layout';
 // import { Memorize } from './memos/Memorize';
 // import { MemoHook } from './memos/MemoHook';
-import { CallbackHook } from './memos/CallbackHook';
+// import { CallbackHook } from './memos/CallbackHook';
+import { Parent } from './homework-memo/Parent';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<CallbackHook />);
+ReactDOM.createRoot(document.getElementById('root')).render(<Parent />);
