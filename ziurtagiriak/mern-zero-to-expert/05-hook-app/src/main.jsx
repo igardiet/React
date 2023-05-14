@@ -10,6 +10,7 @@ import './index.css';
 // import { FocusScreen } from './useRef/FocusScreen';
 // import { Layout } from './useLayoutEffect/Layout';
 // import { Memorize } from './memos/Memorize';
-import { MemoHook } from './memos/MemoHook';
+// import { MemoHook } from './memos/MemoHook';
+import { CallbackHook } from './memos/CallbackHook';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<MemoHook />);
+ReactDOM.createRoot(document.getElementById('root')).render(<CallbackHook />);
