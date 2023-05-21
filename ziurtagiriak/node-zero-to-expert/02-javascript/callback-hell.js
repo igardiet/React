@@ -24,7 +24,7 @@ const salaries = [
 ];
 
 const getEmployee = (id, callback) => {
-  const employee = employees.find((e) => e.id === id);
+  const employee = employees.find((e) => e.id === id)?.employee;
   if (employee) {
     callback(null, employee);
   } else {
@@ -32,11 +32,27 @@ const getEmployee = (id, callback) => {
   }
 };
 
-getEmployee(1, (err, employee) => {
-  if (err) {
-    console.log('ERROR!');
-    return console.log(err);
+const getSalary = (id, callback) => {
+  const salary = salaries.find((s) => s.id === id)?.salary;
+  if (salary) {
+    callback(null, salary);
+  } else {
+    callback(`Salary from employee nº ${id} is not registered!`);
   }
-  console.log('Employee exists!');
-  console.log(employee);
+};
+
+const id = 1;
+
+getEmployee(id, (err, employee) => {
+  if (err) {
+    return console.log(`ERROR!: ${err}`);
+  }
+  console.log(`Employee: ${employee}`);
+});
+
+getSalary(id, (err, salary) => {
+  if (err) {
+    return console.log(`ERROR!: ${err}`);
+  }
+  console.log(`Salary: ${salary}`);
 });
