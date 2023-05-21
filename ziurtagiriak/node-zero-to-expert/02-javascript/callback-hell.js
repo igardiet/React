@@ -24,7 +24,7 @@ const salaries = [
 ];
 
 const getEmployee = (id, callback) => {
-  const employee = employees.find((e) => e.id === id)?.employee;
+  const employee = employees.find((e) => e.id === id)?.name;
   if (employee) {
     callback(null, employee);
   } else {
