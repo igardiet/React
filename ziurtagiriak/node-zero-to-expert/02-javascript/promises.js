@@ -41,22 +41,33 @@ const getSalary = (id) => {
   });
 };
 
-const id = 1;
+const id = 11;
 
+// CHAINED PROMISES
+let name;
 getEmployee(id)
-  .then((employee) => console.log(employee))
+  .then((employee) => {
+    name = employee;
+    return getSalary(id);
+  })
+  .then((salary) => console.log(`Employee ${name} has a salary of ${salary}`))
   .catch((err) => console.log(err));
 
-getSalary(id)
-  .then((salary) => console.log(salary))
-  .catch((err) => console.log(err));
+// UNCHAINED PROMISES
+// getEmployee(id)
+//   .then((employee) => console.log(employee))
+//   .catch((err) => console.log(err));
+
+// getSalary(id)
+//   .then((salary) => console.log(salary))
+//   .catch((err) => console.log(err));
 
 // DO NOT CODE CALLBACK HELL LIKE THIS!
 // getEmployee(id)
 //   .then((employee) => {
 //     getSalary(id)
 //       .then((salary) => {
-//         console.log(`Employee ${employee} has a salary of ${salary}`);
+//         console.log(`Employee ${name} has a salary of ${salary}`);
 //       })
 //       .catch((err) => console.log(err));
 //   })
