@@ -18,7 +18,7 @@ const createFile = async (base = 5, list = false, until = 10) => {
       console.log(terminal);
     }
 
-    fs.writeFileSync(`table-${base}.txt`, exit);
+    fs.writeFileSync(`./exit/table-${base}.txt`, exit);
     return `table-${base}.txt successfully created!`;
   } catch (err) {
     throw err;
