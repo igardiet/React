@@ -1,19 +1,21 @@
 const fs = require('fs');
 const colors = require('colors');
 
-const createFile = async (base = 5, list = false) => {
+const createFile = async (base = 5, list = false, until = 10) => {
   try {
-    let exit = '';
+    let exit,
+      terminal = '';
 
-    for (let i = 1; i <= 10; i++) {
-      exit += `${base} ${'X'.cyan} ${i} ${'='.cyan} ${base * i}\n`;
+    for (let i = 1; i <= until; i++) {
+      exit += `${base} x ${i} = ${base * i}\n`;
+      terminal += `${base} ${'x'.cyan} ${i} ${'='.cyan} ${base * i}\n`;
     }
 
     if (list) {
       console.log('==============='.red);
       console.log('Table of:'.blue, colors.white(base));
       console.log('==============='.red);
-      console.log(exit);
+      console.log(terminal);
     }
 
     fs.writeFileSync(`table-${base}.txt`, exit);
