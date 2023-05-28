@@ -158,3 +158,5 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+ziurtagiriak/node-zero-to-expert/03-node-bases/exit/*.txt
