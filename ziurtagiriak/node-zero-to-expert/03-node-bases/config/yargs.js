@@ -12,6 +12,12 @@ const argv = require('yargs')
     default: false,
     describe: 'It shows the table in console',
   })
+  .option('u', {
+    alias: 'until',
+    type: 'number',
+    default: '10',
+    describe: 'Multiplication table until...',
+  })
   .check((argv, options) => {
     if (isNaN(argv.b)) {
       throw 'Base must be a number';
