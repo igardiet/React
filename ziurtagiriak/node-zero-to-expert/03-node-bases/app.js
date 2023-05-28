@@ -1,10 +1,11 @@
 const { createFile } = require('./helpers/multiply');
 const argv = require('./config/yargs');
+require('colors');
 
 console.clear();
 
 createFile(argv.b, argv.l)
-  .then((fileName) => console.log(fileName, 'created'))
+  .then((fileName) => console.log(fileName.rainbow, 'created'))
   .catch((err) => console.log(err));
 
 // COMMANDS TO TEST THIS!
