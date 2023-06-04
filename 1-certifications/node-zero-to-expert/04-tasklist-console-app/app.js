@@ -4,6 +4,7 @@ const {
   pause,
   readInput,
   deleteTaskList,
+  confirm,
 } = require('./helpers/inquirer');
 const { saveDb, readDb } = require('./helpers/saveFile');
 const Tasks = require('./models/Tasks');
@@ -36,7 +37,13 @@ const main = async () => {
         false;
       case '6': // Delete
         const id = await deleteTaskList(tasks.listArr);
-        console.log(id);
+        if (id !== '0') {
+          const ok = await confirm('Are you sure?');
+          if (ok) {
+            tasks.deleteTask(id);
+            console.log('Task successfully deleted!');
+          }
+        }
         break;
     }
     saveDb(tasks.listArr);
