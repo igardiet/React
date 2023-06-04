@@ -1,7 +1,9 @@
 const Task = require('./task');
 
 class Tasks {
-  _list = {};
+  _list = {
+    abc: 123,
+  };
 
   get listArr() {
     const list = [];
@@ -14,6 +16,12 @@ class Tasks {
 
   constructor() {
     this._list = {};
+  }
+
+  deleteTask(id = '') {
+    if (this._list[id]) {
+      delete this._list[id];
+    }
   }
 
   loadTasksFromArray(tasks = []) {
@@ -35,6 +43,25 @@ class Tasks {
       const state = completedIn ? 'Completed'.white : 'Pending'.blue;
 
       console.log(`${idx} ${desc} :: ${state}`);
+    });
+  }
+  listCompletedPending(completed = true) {
+    console.log();
+    let counter = 0;
+    this.listArr.forEach((task) => {
+      const { desc, completedIn } = task;
+      const state = completedIn ? 'Completed'.green : 'Pending'.blue;
+      if (completed) {
+        if (completedIn) {
+          counter += 1;
+          console.log(`${(counter + '.').red}. ${desc} :: ${completedIn}`);
+        }
+      } else {
+        if (!completedIn) {
+          counter += 1;
+          console.log(`${(counter + '.').red} ${desc} :: ${state}`);
+        }
+      }
     });
   }
 }
