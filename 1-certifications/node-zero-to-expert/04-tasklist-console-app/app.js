@@ -38,7 +38,7 @@ const main = async () => {
         false;
       case '5': // completed | pending
         const ids = await showListedChecklist(tasks.listArr);
-        console.log(ids);
+        tasks.toggleCompleted(ids);
         break;
       case '6': // Delete
         const id = await deleteTaskList(tasks.listArr);
