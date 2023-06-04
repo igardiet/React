@@ -9,9 +9,9 @@ const main = async () => {
 
   const tasksDb = readDb();
   if (tasksDb) {
-    //establish tasks
+    // Load tasks
+    tasks.loadTasksFromArray(tasksDb);
   }
-  await pause();
 
   do {
     opt = await inquirerMenu(); // Prints menu
