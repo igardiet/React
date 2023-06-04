@@ -21,7 +21,7 @@ const main = async () => {
         tasks.createTask(desc);
         break;
       case '2':
-        console.log(tasks.listArr);
+        tasks.fullList();
         break;
     }
     saveDb(tasks.listArr);
