@@ -5,21 +5,30 @@
 
 int main()
 {
-    int maxValue = 5;
     srand(time(NULL));
-    int randomNumber = rand() % maxValue + 1;
+    int randomNumber = rand() % 5;
 
     // printf("%d\n", randomNumber);
-    printf("Guess a number 0 - %d: ", maxValue);
-    int input;
-    scanf("%d", &input);
+    printf("Pick a number 0 - 5. If you guess right, you win!\n");
+    printf("Guess wrong and face your fate...");
+    int guess;
+    scanf("%d", &guess);
 
-    if (input == randomNumber)
+    printf("You guessed %d\n ", guess);
+    printf("The correct answer was %d\n", randomNumber);
+
+    if (guess == randomNumber)
     {
         printf("You win!\n");
+        return 0;
     }
     else
     {
         printf("You lose! Try again\n");
+        return 0;
+    }
+    {
+        printf("Thak you for playing!\n");
+        return 0;
     }
 }
