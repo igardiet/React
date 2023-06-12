@@ -25,6 +25,23 @@ int main()
     else if (input == 4)
     {
         printf("Exiting...");
+        printf("Save? Y/N: ");
+        char q;
+        getchar();
+        scanf("%c", &q);
+
+        if (q == 'Y' || q == 'y')
+        {
+            printf("Saving changes!\n");
+        }
+        else if (q == 'N' || q == 'n')
+        {
+            printf("Changes were not saved!\n");
+        }
+        else
+        {
+            printf("Incorrect characters, data could not be read\n");
+        }
     }
     else
     {
