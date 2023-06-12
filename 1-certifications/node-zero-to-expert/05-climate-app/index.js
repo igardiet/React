@@ -24,7 +24,11 @@ const main = async () => {
 
         // select place
         const id = await listPlaces(places);
+        if (id === '0') continue;
         const selectedPlace = places.find(p => p.id === id);
+
+        // save in DB
+        searches.addHistory(selectedPlace.name)
 
         // climate
         const climate = await searches.climatePlace(
@@ -43,6 +47,13 @@ const main = async () => {
         console.log('Max:', climate.max);
         console.log('Description:', climate.desc.red);
         break;
+
+        case 2:
+          searches.capitalizedHistory.forEach((place, i) => {
+            const idx = `${i + 1}.`.green
+            console.log(`${idx} ${place}`);
+          })
+        break
     }
 
     if (opt !== 0) await pause();
