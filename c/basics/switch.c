@@ -10,16 +10,12 @@ int main()
     switch (slices)
     {
     case 1:
+    case 2:
+    case 3:
         printf("One slice\n");
         break;
-    case 2:
-        printf("Two slices\n");
-        break;
-    case 3:
-        printf("Three slices\n");
-        break;
     case 4:
-        printf("Four slices\n");
+        printf("Two slices\n");
         break;
     default:
         printf("Too much slices!\n");
