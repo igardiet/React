@@ -160,5 +160,5 @@ yarn-debug.log*
 yarn-error.log*
 
 1-certifications/node-zero-to-expert/03-node-bases/exit/*.txt
-
+1-certifications/node-zero-to-expert/06-webserver/public
 c/basics/a.out
