@@ -1,8 +1,11 @@
 const express = require('express');
+const hbs = require('hbs');
 const app = express();
 const port = 8080;
 
+// Handlebars
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(express.static('public')); // Serve static content middleware
 
@@ -14,11 +17,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/generic', (req, res) => {
-  res.sendFile(__dirname + '/public/generic.html');
+  res.render('generic', {
+    name: 'George Lucas',
+    title: 'Star Wars',
+  });
 });
 
 app.get('/elements', (req, res) => {
-  res.sendFile(__dirname + '/public/elements.html');
+  res.render('elements', {
+    name: 'George Lucas',
+    title: 'Star Wars',
+  });
 });
 
 app.get('*', (req, res) => {
