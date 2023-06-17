@@ -11,11 +11,17 @@ int factorial(int number)
     return factorial;
 }
 
+void outputFactorial(int input)
+{
+    printf("The factorial of %d is %d.\n", input, factorial(input));
+}
+
 int main()
 {
-    printf("%d ", factorial(5));
-    printf("%d ", factorial(4));
-
-    printf("%d ", factorial(factorial(3)));
+    // outputFactorial(5);
+    for (int i = 1; i < 11; i++)
+    {
+        outputFactorial(i);
+    }
     return 0;
 }
