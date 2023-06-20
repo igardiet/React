@@ -21,7 +21,7 @@ const UserSchema = Schema({
   role: {
     type: String,
     required: true,
-    emun: ['ADMIN_ROLE', 'USER_ROLE'],
+    emun: ['ADMIN_ROLE', 'USER_ROLE', 'SALES_ROLE'],
   },
   status: {
     type: Boolean,
@@ -32,5 +32,11 @@ const UserSchema = Schema({
     default: false,
   },
 });
+
+// REMOVE DESIRED KEYS FROM MONGODB COLLECTION *!
+UserSchema.methods.toJSON = function () {
+  const { __v, password, ...user } = this.toObject();
+  return user;
+};
 
 module.exports = model('User', UserSchema);
