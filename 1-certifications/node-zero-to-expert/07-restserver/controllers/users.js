@@ -2,15 +2,12 @@ const { response, request } = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-const getUsers = (req = request, res = response) => {
-  const { q, name = 'No name', apiKey, page = 1, limit } = req.query;
+const getUsers = async (req = request, res = response) => {
+  const { limit = 5, from = 0 } = req.query;
+  const users = await User.find().skip(Number(from)).limit(Number(limit));
+
   res.json({
-    msg: 'get API - controller',
-    q,
-    name,
-    apiKey,
-    page,
-    limit,
+    users,
   });
 };
 
@@ -30,12 +27,18 @@ const postUsers = async (req, res = response) => {
   });
 };
 
-const putUsers = (req, res = response) => {
+const putUsers = async (req, res = response) => {
   const { id } = req.params;
-  res.json({
-    msg: 'put API - controller',
-    id,
-  });
+  const { _id, password, google, ...rest } = req.body;
+
+  if (password) {
+    const salt = bcrypt.genSaltSync();
+    rest.password = bcrypt.hashSync(password.toString(), salt);
+  }
+
+  const user = await User.findByIdAndUpdate(id, rest);
+
+  res.json(user);
 };
 
 const patchUsers = (req, res) => {
