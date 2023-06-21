@@ -16,6 +16,7 @@ const {
 } = require('../controllers/users');
 
 router.get('/', getUsers);
+
 router.post(
   '/',
   [
@@ -43,7 +44,16 @@ router.put(
   putUsers
 );
 
+router.delete(
+  '/:id',
+  [
+    check('id', 'Is not a valid ID').isMongoId(),
+    check('id').custom(userExistsById),
+    validateFields,
+  ],
+  deleteUsers
+);
+
 router.patch('/', patchUsers);
-router.delete('/', deleteUsers);
 
 module.exports = router;
