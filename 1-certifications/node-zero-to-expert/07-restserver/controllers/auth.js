@@ -10,7 +10,7 @@ const login = async (req, res = response) => {
     // EMAIL EXISTS ?
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({
+      return res.status(400).json({
         msg: 'User or Password incorrect',
       });
     }
@@ -45,17 +45,33 @@ const login = async (req, res = response) => {
 const googleSignIn = async (req, res = response) => {
   const { id_token } = req.body;
   try {
-    const googleUser = await googleVerify(id_token);
-    console.log(googleUser);
-
+    const { email, name, img } = await googleVerify(id_token);
+    let user = await User.findOne({ email });
+    if (!user) {
+      const data = {
+        name,
+        email,
+        password: 'string',
+        img,
+        role: 'USER_ROLE',
+        google: true,
+      };
+      user = new User(data);
+      await user.save();
+    }
+    if (!user.status) {
+      return res.status(401).json({
+        msg: 'Talk to Admin, user blocked',
+      });
+    }
+    const token = await generateJWT(user.id);
     res.json({
-      msg: 'All good!',
-      id_token,
+      user,
+      token,
     });
   } catch (error) {
-    json.status(400).json({
-      ok: false,
-      msg: 'Token could not be verified',
+    res.status(400).json({
+      msg: 'Google token is not valid',
     });
   }
 };
