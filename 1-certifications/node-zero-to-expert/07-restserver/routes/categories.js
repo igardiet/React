@@ -1,19 +1,26 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateJWT, validateFields } = require('../middlewares');
-const { createCategory } = require('../controllers/categories');
+const {
+  createCategory,
+  obtainCategories,
+  obtainCategory,
+} = require('../controllers/categories');
+const { categoryExistsById } = require('../helpers/db-validators');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json('get');
-});
+router.get('/', obtainCategories);
 
-router.get('/:id', [check('id').custom(
-  // categoryExists
-  )], (req, res) => {
-  res.json('get - id');
-});
+router.get(
+  '/:id',
+  [
+    check('id', 'It is not a valid Mongo ID').isMongoId(),
+    check('id').custom(categoryExistsById),
+    validateFields,
+  ],
+  obtainCategory
+);
 
 router.post(
   '/',
