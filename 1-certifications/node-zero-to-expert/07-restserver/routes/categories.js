@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { validateJWT, validateFields } = require('../middlewares');
+const { validateJWT, validateFields, isAdminRole } = require('../middlewares');
 const {
   createCategory,
   obtainCategories,
   obtainCategory,
+  updateCategory,
+  deleteCategory,
 } = require('../controllers/categories');
 const { categoryExistsById } = require('../helpers/db-validators');
 
@@ -32,12 +34,27 @@ router.post(
   createCategory
 );
 
-router.put('/:id', (req, res) => {
-  res.json('put');
-});
+router.put(
+  '/:id',
+  [
+    validateJWT,
+    check('name', 'Name is mandatory').not().isEmpty(),
+    check('id').custom(categoryExistsById),
+    validateFields,
+  ],
+  updateCategory
+);
 
-router.delete('/:id', (req, res) => {
-  res.json('user status: false');
-});
+router.delete(
+  '/:id',
+  [
+    validateJWT,
+    isAdminRole,
+    check('id', 'It is not a valid Mongo ID').isMongoId(),
+    check('id').custom(categoryExistsById),
+    validateFields,
+  ],
+  deleteCategory
+);
 
 module.exports = router;
