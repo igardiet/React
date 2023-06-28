@@ -10,7 +10,7 @@
     <hr />
     <div
       id="g_id_onload"
-      data-client_id="364119436950-aj3i07f1ncvf7v8hgfgnsfq7t14u813j.apps.googleusercontent.com"
+      data-client_id="1051144334490-snaml3pl8qod6jv8a31n1ae969er2q7a.apps.googleusercontent.com"
       data-auto_prompt="false"
       data-callback="handleCredentialResponse"
     ></div>
@@ -28,6 +28,7 @@
 
     <script>
       function handleCredentialResponse(response) {
+        console.log('id_token', response.credential)
         const body = {id_token: response.credential}
 
         fetch('http://localhost:8080/api/auth/google', {
