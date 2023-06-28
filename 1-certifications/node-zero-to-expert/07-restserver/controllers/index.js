@@ -1,37 +1,15 @@
-const { login, googleSignIn } = require('./auth');
-const {
-  obtainCategories,
-  obtainCategory,
-  createCategory,
-  updateCategory,
-  deleteCategory,
-} = require('./categories');
-const {
-  obtainProducts,
-  obtainProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} = require('./products');
-const { search } = require('./search');
-const { getUsers, postUsers, putUsers, deleteUsers } = require('./users');
+const authController = require('./auth');
+const categoriesController = require('./categories');
+const productsController = require('./products');
+const searchController = require('./search');
+const uploadsController = require('./uploads');
+const usersController = require('./users');
 
 module.exports = {
-  login,
-  googleSignIn,
-  obtainCategories,
-  obtainCategory,
-  createCategory,
-  updateCategory,
-  deleteCategory,
-  obtainProducts,
-  obtainProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  search,
-  getUsers,
-  postUsers,
-  putUsers,
-  deleteUsers,
+  ...authController,
+  ...categoriesController,
+  ...productsController,
+  ...searchController,
+  ...uploadsController,
+  ...usersController,
 };

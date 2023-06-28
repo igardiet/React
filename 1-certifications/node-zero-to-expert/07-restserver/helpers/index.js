@@ -1,19 +1,11 @@
-const {
-  isValidRole,
-  isEmailExistent,
-  userExistsById,
-  categoryExistsById,
-  productExistsById,
-} = require('./db-validators');
-const { generateJWT } = require('./generate-jwt');
-const { googleVerify } = require('./google-verify');
+const dbValidators = require('./db-validators');
+const generateJWT = require('./generate-jwt');
+const googleVerify = require('./google-verify');
+const uploadFile = require('./upload-file');
 
 module.exports = {
-  isValidRole,
-  isEmailExistent,
-  userExistsById,
-  categoryExistsById,
-  productExistsById,
-  generateJWT,
-  googleVerify,
+  ...dbValidators,
+  ...generateJWT,
+  ...googleVerify,
+  ...uploadFile,
 };
