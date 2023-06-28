@@ -2,7 +2,8 @@ const { response } = require('express');
 const { ObjectId } = require('mongoose').Types;
 const { User, Category, Product } = require('../models');
 
-const allowedCollections = ['category', 'products', 'roles', 'users'];
+const allowedCollections = ['categories', 'products', 'roles', 'users'];
+
 const searchUsers = async (term = '', res = response) => {
   const isMongoID = ObjectId.isValid(term);
   if (isMongoID) {
@@ -11,6 +12,53 @@ const searchUsers = async (term = '', res = response) => {
       results: user ? [user] : [],
     });
   }
+  // REGULAR EXPRESION SEARCH BY INDEX
+  const regex = new RegExp(term, 'i');
+  const users = await User.find({
+    $or: [{ name: regex }, { email: regex }],
+    $and: [{ status: true }],
+  });
+
+  res.json({
+    results: users,
+  });
+};
+
+const searchCategories = async (term = '', res = response) => {
+  const isMongoID = ObjectId.isValid(term);
+  if (isMongoID) {
+    const category = await Category.findById(term);
+    return res.json({
+      results: category ? [category] : [],
+    });
+  }
+  // REGULAR EXPRESION
+  const regex = new RegExp(term, 'i');
+  const categories = await Category.find({ name: regex, status: true });
+
+  res.json({
+    results: categories,
+  });
+};
+
+const searchProducts = async (term = '', res = response) => {
+  const isMongoID = ObjectId.isValid(term);
+  if (isMongoID) {
+    const product = await Product.findById(term).populate('category', 'name');
+    return res.json({
+      results: product ? [product] : [],
+    });
+  }
+  // REGULAR EXPRESION
+  const regex = new RegExp(term, 'i');
+  const products = await Product.find({ name: regex, status: true }).populate(
+    'category',
+    'name'
+  );
+
+  res.json({
+    results: products,
+  });
 };
 
 const search = (req, res = response) => {
@@ -24,9 +72,11 @@ const search = (req, res = response) => {
     case 'users':
       searchUsers(term, res);
       break;
-    case 'category':
+    case 'categories':
+      searchCategories(term, res);
       break;
     case 'products':
+      searchProducts(term, res);
       break;
     default:
       res.status(500).json({
