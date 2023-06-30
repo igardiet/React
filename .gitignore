@@ -161,4 +161,6 @@ yarn-error.log*
 
 1-certifications/node-zero-to-expert/03-node-bases/exit/*.txt
 1-certifications/node-zero-to-expert/06-webserver/public
+1-certifications/node-zero-to-expert/07-restserver/uploads/products
+1-certifications/node-zero-to-expert/07-restserver/uploads/users
 c/basics/a.out
