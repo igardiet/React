@@ -1,2 +1,2 @@
 # Note
-All images/files will be saved here
+All products and users images/files will be stored or saved here
