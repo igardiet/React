@@ -1,11 +1,13 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require( 'uuid' );
 
-class Task {
+class Task
+{
   id = '';
   desc = '';
   completedIn = null;
 
-  constructor(desc) {
+  constructor( desc )
+  {
     this.id = uuidv4();
     this.desc = desc;
     this.completedIn = null;

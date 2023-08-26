@@ -1,5 +1,5 @@
-require('colors');
-const inquirer = require('inquirer');
+require( 'colors' );
+const inquirer = require( 'inquirer' );
 
 const questions = [
   {
@@ -23,17 +23,19 @@ const questions = [
   },
 ];
 
-const inquirerMenu = async () => {
+const inquirerMenu = async () =>
+{
   console.clear();
-  console.log('==================='.green);
-  console.log('Select an option'.red);
-  console.log('===================\n'.green);
+  console.log( '==================='.green );
+  console.log( 'Select an option'.red );
+  console.log( '===================\n'.green );
 
-  const { option } = await inquirer.prompt(questions);
+  const { option } = await inquirer.prompt( questions );
   return option;
 };
 
-const pause = async () => {
+const pause = async () =>
+{
   const question = [
     {
       type: 'input',
@@ -41,41 +43,46 @@ const pause = async () => {
       message: `Press ${'enter'.red} to continue`,
     },
   ];
-  console.log('\n');
-  await inquirer.prompt(question);
+  console.log( '\n' );
+  await inquirer.prompt( question );
 };
 
-const readInput = async (message) => {
+const readInput = async ( message ) =>
+{
   const question = [
     {
       type: 'input',
       name: 'desc',
       message,
-      validate(value) {
-        if (value.length === 0) {
+      validate( value )
+      {
+        if ( value.length === 0 )
+        {
           return 'Please insert a value';
         }
         return true;
       },
     },
   ];
-  const { desc } = await inquirer.prompt(question);
+  const { desc } = await inquirer.prompt( question );
   return desc;
 };
 
-const listPlaces = async (places = []) => {
-  const choices = places.map((place, i) => {
+const listPlaces = async ( places = [] ) =>
+{
+  const choices = places.map( ( place, i ) =>
+  {
     const idx = `${i + 1}.`.green;
     return {
       value: place.id,
       name: `${idx} ${place.name}`,
     };
-  });
+  } );
 
-  choices.unshift({
+  choices.unshift( {
     value: '0',
     name: '0.'.green + ' Cancel',
-  });
+  } );
 
   const questions = [
     {
@@ -85,11 +92,12 @@ const listPlaces = async (places = []) => {
       choices,
     },
   ];
-  const { id } = await inquirer.prompt(questions);
+  const { id } = await inquirer.prompt( questions );
   return id;
 };
 
-const confirm = async (message) => {
+const confirm = async ( message ) =>
+{
   const question = [
     {
       type: 'confirm',
@@ -97,19 +105,21 @@ const confirm = async (message) => {
       message,
     },
   ];
-  const { ok } = await inquirer.prompt(question);
+  const { ok } = await inquirer.prompt( question );
   return ok;
 };
 
-const showListedChecklist = async (tasks = []) => {
-  const choices = tasks.map((task, i) => {
+const showListedChecklist = async ( tasks = [] ) =>
+{
+  const choices = tasks.map( ( task, i ) =>
+  {
     const idx = `${i + 1}.`.green;
     return {
       value: task.id,
       name: `${idx} ${task.desc}`,
       checked: task.completedIn ? true : false,
     };
-  });
+  } );
 
   const question = [
     {
@@ -119,7 +129,7 @@ const showListedChecklist = async (tasks = []) => {
       choices,
     },
   ];
-  const { ids } = await inquirer.prompt(question);
+  const { ids } = await inquirer.prompt( question );
   return ids;
 };
 

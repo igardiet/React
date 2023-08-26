@@ -1,12 +1,12 @@
-const { createFile } = require('./helpers/multiply');
-const argv = require('./config/yargs');
-require('colors');
+const { createFile } = require( './helpers/multiply' );
+const argv = require( './config/yargs' );
+require( 'colors' );
 
 console.clear();
 
-createFile(argv.b, argv.l, argv.u)
-  .then((fileName) => console.log(fileName.rainbow, 'created'))
-  .catch((err) => console.log(err));
+createFile( argv.b, argv.l, argv.u )
+  .then( ( fileName ) => console.log( fileName.rainbow, 'created' ) )
+  .catch( ( err ) => console.log( err ) );
 
 // COMMANDS TO TEST THIS!
 // node app --help        | help

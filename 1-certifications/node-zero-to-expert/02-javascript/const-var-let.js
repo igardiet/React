@@ -1,6 +1,7 @@
 const name = 'John';
 
-if (true) {
+if ( true )
+{
   const name = 'Albert';
 }
-console.log(name);
+console.log( name );

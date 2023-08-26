@@ -23,35 +23,40 @@ const salaries = [
   },
 ];
 
-const getEmployee = (id) => {
-  return new Promise((resolve, reject) => {
-    const employee = employees.find((e) => e.id === id)?.name;
+const getEmployee = ( id ) =>
+{
+  return new Promise( ( resolve, reject ) =>
+  {
+    const employee = employees.find( ( e ) => e.id === id )?.name;
     employee
-      ? resolve(employee)
-      : reject(`There is no employee with an id nº ${id}`);
-  });
+      ? resolve( employee )
+      : reject( `There is no employee with an id nº ${id}` );
+  } );
 };
 
-const getSalary = (id) => {
-  return new Promise((resolve, reject) => {
-    const salary = salaries.find((s) => s.id === id)?.salary;
+const getSalary = ( id ) =>
+{
+  return new Promise( ( resolve, reject ) =>
+  {
+    const salary = salaries.find( ( s ) => s.id === id )?.salary;
     salary
-      ? resolve(salary)
-      : reject(`There is no salary registered for the id nº ${id}`);
-  });
+      ? resolve( salary )
+      : reject( `There is no salary registered for the id nº ${id}` );
+  } );
 };
 
 const id = 11;
 
 // CHAINED PROMISES
 let name;
-getEmployee(id)
-  .then((employee) => {
+getEmployee( id )
+  .then( ( employee ) =>
+  {
     name = employee;
-    return getSalary(id);
-  })
-  .then((salary) => console.log(`Employee ${name} has a salary of ${salary}`))
-  .catch((err) => console.log(err));
+    return getSalary( id );
+  } )
+  .then( ( salary ) => console.log( `Employee ${name} has a salary of ${salary}` ) )
+  .catch( ( err ) => console.log( err ) );
 
 // UNCHAINED PROMISES
 // getEmployee(id)

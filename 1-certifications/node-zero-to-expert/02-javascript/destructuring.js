@@ -3,7 +3,8 @@ const batman = {
   surname: 'Wayne',
   power: 'Money',
 
-  getName() {
+  getName()
+  {
     return `${this.name} ${this.surname} ${this.power}`;
   },
 };
@@ -12,8 +13,9 @@ const batman = {
 // const surname = batman.surname
 // const power = batman.power
 
-const printHero = ({ name, surname, power, age = 35 }) => {
-  console.log(name, surname, power, age);
+const printHero = ( { name, surname, power, age = 35 } ) =>
+{
+  console.log( name, surname, power, age );
 };
 // printHero(batman)
 
@@ -24,4 +26,4 @@ const heroes = ['Batman', 'Superman', 'Deadpool'];
 // const h3 = heroes[2]
 const [, , h3] = heroes;
 
-console.log(h3);
+console.log( h3 );

@@ -1,4 +1,5 @@
-const greet = (name) => {
+const greet = ( name ) =>
+{
   return `Greetings ${name}`;
 };
-console.log(greet('George'));
+console.log( greet( 'George' ) );

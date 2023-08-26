@@ -1,83 +1,105 @@
-const Task = require('./task');
+const Task = require( './task' );
 
-class Tasks {
+class Tasks
+{
   _list = {
     abc: 123,
   };
 
-  get listArr() {
+  get listArr()
+  {
     const list = [];
-    Object.keys(this._list).forEach((key) => {
+    Object.keys( this._list ).forEach( ( key ) =>
+    {
       const task = this._list[key];
-      list.push(task);
-    });
+      list.push( task );
+    } );
     return list;
   }
 
-  constructor() {
+  constructor()
+  {
     this._list = {};
   }
 
-  deleteTask(id = '') {
-    if (this._list[id]) {
+  deleteTask( id = '' )
+  {
+    if ( this._list[id] )
+    {
       delete this._list[id];
     }
   }
 
-  loadTasksFromArray(tasks = []) {
-    tasks.forEach((task) => {
+  loadTasksFromArray( tasks = [] )
+  {
+    tasks.forEach( ( task ) =>
+    {
       this._list[task.id] = task;
-    });
+    } );
   }
 
-  createTask(desc = '') {
-    const task = new Task(desc);
+  createTask( desc = '' )
+  {
+    const task = new Task( desc );
     this._list[task.id] = task;
   }
 
-  fullList() {
+  fullList()
+  {
     console.log();
-    this.listArr.forEach((task, i) => {
+    this.listArr.forEach( ( task, i ) =>
+    {
       const idx = `${i + 1}`.red;
       const { desc, completedIn } = task;
       const state = completedIn ? 'Completed'.white : 'Pending'.blue;
 
-      console.log(`${idx} ${desc} :: ${state}`);
-    });
+      console.log( `${idx} ${desc} :: ${state}` );
+    } );
   }
-  listCompletedPending(completed = true) {
+  listCompletedPending( completed = true )
+  {
     console.log();
     let counter = 0;
-    this.listArr.forEach((task) => {
+    this.listArr.forEach( ( task ) =>
+    {
       const { desc, completedIn } = task;
       const state = completedIn ? 'Completed'.green : 'Pending'.blue;
-      if (completed) {
-        if (completedIn) {
+      if ( completed )
+      {
+        if ( completedIn )
+        {
           counter += 1;
           console.log(
-            `${(counter + '.').red}. ${desc} :: ${completedIn.green}`
+            `${( counter + '.' ).red}. ${desc} :: ${completedIn.green}`
           );
         }
-      } else {
-        if (!completedIn) {
+      } else
+      {
+        if ( !completedIn )
+        {
           counter += 1;
-          console.log(`${(counter + '.').red} ${desc} :: ${state}`);
+          console.log( `${( counter + '.' ).red} ${desc} :: ${state}` );
         }
       }
-    });
+    } );
   }
-  toggleCompleted(ids = []) {
-    ids.forEach((id) => {
+  toggleCompleted( ids = [] )
+  {
+    ids.forEach( ( id ) =>
+    {
       const task = this._list[id];
-      if (!task.completedIn) {
+      if ( !task.completedIn )
+      {
         task.completedIn = new Date().toISOString();
       }
-    });
-    this.listArr.forEach((task) => {
-      if (!ids.includes(task.id)) {
+    } );
+    this.listArr.forEach( ( task ) =>
+    {
+      if ( !ids.includes( task.id ) )
+      {
         this._list[task.id].completedIn = null;
       }
-    });
+    } );
   }
 }
 module.exports = Tasks;
