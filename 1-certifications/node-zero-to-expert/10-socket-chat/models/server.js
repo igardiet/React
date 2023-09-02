@@ -1,87 +1,81 @@
 const express = require( 'express' );
-const cors = require( 'cors' );
 const fileUpload = require( 'express-fileupload' );
-const { createServer } = require( 'http' );
+const cors = require( 'cors' );
+const gracefulFs = require( 'graceful-fs' );
 const { dbConnection } = require( '../database/config' );
-const { socketController } = require( "../sockets/controller" );
 
 class Server
 {
-    constructor()
+  constructor()
+  {
+    this.app = express();
+    this.port = process.env.PORT || 3000;
+    this.paths = {
+      auth: '/api/auth',
+      search: '/api/search',
+      categories: '/api/categories',
+      products: '/api/products',
+      uploads: '/api/uploads',
+      users: '/api/users',
+    };
+    this.connectDB(); // Connection to database
+    this.middlewares(); // Middlewares
+    this.routes(); // App routes
+  }
+
+  async connectDB()
+  {
+    await dbConnection();
+  }
+
+  middlewares()
+  {
+    this.app.use( cors() ); // cors
+    this.app.use( express.json() ); // Body read and parse
+    this.app.use( express.static( 'public' ) ); // Public directory
+    // Error handling middleware
+    this.app.use( ( err, req, res, next ) =>
     {
-        this.app = express();
-        this.port = process.env.PORT;
-        this.server = createServer( this.app );
-        this.io = require( 'socket.io' )( this.server );
+      console.error( err );
+      res.status( 500 ).json( { error: 'Internal Server Error' } );
+    } );
+    // File upload
+    this.app.use(
+      fileUpload( {
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+        createParentPath: true
+      } )
+    );
+  }
 
-        this.paths = {
-            auth: '/api/auth',
-            buscar: '/api/buscar',
-            categorias: '/api/categorias',
-            productos: '/api/productos',
-            usuarios: '/api/usuarios',
-            uploads: '/api/uploads',
-        };
+  routes()
+  {
+    this.app.use( this.paths.auth, require( '../routes/auth' ) );
+    this.app.use( this.paths.search, require( '../routes/search' ) );
+    this.app.use( this.paths.categories, require( '../routes/categories' ) );
+    this.app.use( this.paths.products, require( '../routes/products' ) );
+    this.app.use( this.paths.uploads, require( '../routes/uploads' ) );
+    this.app.use( this.paths.users, require( '../routes/users' ) );
+  }
 
-        // Conectar a base de datos
-        this.conectarDB();
-
-        // Middlewares
-        this.middlewares();
-
-        // Rutas de mi aplicación
-        this.routes();
-
-        // Sockets
-        this.sockets();
-    }
-
-    async conectarDB()
+  listen()
+  {
+    const server = this.app.listen( this.port || 3000, () =>
     {
-        await dbConnection();
-    }
+      console.log( `Server running in port: ${this.port}` );
+    } );
 
-    middlewares()
+    // Graceful shutdown
+    process.on( 'SIGINT', () =>
     {
-        // CORS
-        this.app.use( cors() );
-
-        // Lectura y parseo del body
-        this.app.use( express.json() );
-
-        // Directorio Público
-        this.app.use( express.static( 'public' ) );
-
-        // Fileupload - Carga de archivos
-        this.app.use( fileUpload( {
-            useTempFiles: true,
-            tempFileDir: '/tmp/',
-            createParentPath: true
-        } ) );
-    }
-
-    routes()
-    {
-        this.app.use( this.paths.auth, require( '../routes/auth' ) );
-        this.app.use( this.paths.buscar, require( '../routes/buscar' ) );
-        this.app.use( this.paths.categorias, require( '../routes/categorias' ) );
-        this.app.use( this.paths.productos, require( '../routes/productos' ) );
-        this.app.use( this.paths.usuarios, require( '../routes/usuarios' ) );
-        this.app.use( this.paths.uploads, require( '../routes/uploads' ) );
-    }
-
-    sockets()
-    {
-        this.io.on( 'connection', socketController );
-    }
-
-    listen()
-    {
-        this.server.listen( this.port, () =>
-        {
-            console.log( 'Servidor corriendo en puerto', this.port );
-        } );
-    }
+      console.log( 'Shutting down server...' );
+      server.close( () =>
+      {
+        gracefulFs.close(); // Close graceful-fs to ensure file operations are completed
+        process.exit( 0 );
+      } );
+    } );
+  }
 }
-
 module.exports = Server;

@@ -1,2 +1,2 @@
-# Nota
-Aquí van a guardarse todas las imagenes
+# Note
+All products and users images/files will be stored or saved here

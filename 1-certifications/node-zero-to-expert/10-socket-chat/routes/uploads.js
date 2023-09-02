@@ -1,30 +1,41 @@
 const { Router } = require( 'express' );
 const { check } = require( 'express-validator' );
-
-const { validarCampos, validarArchivoSubir } = require( '../middlewares' );
-const { cargarArchivo, actualizarImagen, mostrarImagen, actualizarImagenCloudinary } = require( '../controllers/uploads' );
-const { coleccionesPermitidas } = require( '../helpers' );
-
+const { validateFields, validateFile } = require( '../middlewares' );
+const {
+  loadFile,
+  updateImage,
+  showImage,
+  updateImageCloudinary,
+} = require( '../controllers' );
+const { allowedCollections } = require( '../helpers' );
 
 const router = Router();
 
+router.post( '/', validateFile, loadFile );
+router.put(
+  '/:collection/:id',
+  [
+    validateFile,
+    check( 'id', 'Syntax error, it must be a valid Mongo ID' ).isMongoId(),
+    check( 'collection' ).custom( c =>
+      allowedCollections( c, ['users', 'products'] )
+    ),
+    validateFields,
+  ],
+  updateImageCloudinary
+  // updateImage
+);
 
-router.post( '/', validarArchivoSubir, cargarArchivo );
-
-router.put( '/:coleccion/:id', [
-    validarArchivoSubir,
-    check( 'id', 'El id debe de ser de mongo' ).isMongoId(),
-    check( 'coleccion' ).custom( c => coleccionesPermitidas( c, ['usuarios', 'productos'] ) ),
-    validarCampos
-], actualizarImagenCloudinary );
-// ], actualizarImagen )
-
-router.get( '/:coleccion/:id', [
-    check( 'id', 'El id debe de ser de mongo' ).isMongoId(),
-    check( 'coleccion' ).custom( c => coleccionesPermitidas( c, ['usuarios', 'productos'] ) ),
-    validarCampos
-], mostrarImagen );
-
-
+router.get(
+  '/:collection/:id',
+  [
+    check( 'id', 'Id must be a valid Mongo Id' ).isMongoId(),
+    check( 'collection' ).custom( c =>
+      allowedCollections( c, ['users', 'products'] )
+    ),
+    validateFields,
+  ],
+  showImage
+);
 
 module.exports = router;

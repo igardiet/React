@@ -2,72 +2,56 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Signin</title>
-
-    <meta name="google-signin-client_id"
-        content="1023916028923-mnn067lcjn3itrr0lo8oj1s07kddgrcj.apps.googleusercontent.com">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Sign-in</title>
 </head>
 
-<body class="container">
+<body>
+  <h1>Google Sign-in</h1>
+  <hr />
+  <div id="g_id_onload" data-client_id="1051144334490-snaml3pl8qod6jv8a31n1ae969er2q7a.apps.googleusercontent.com"
+    data-auto_prompt="false" data-callback="handleCredentialResponse"></div>
+  <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+    data-shape="rectangular" data-logo_alignment="left"></div>
 
-    <div class="row mt-5">
-        <div class="col-sm-6">
-            <h1>Google Sign in</h1>
-            <hr>
-            <br>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <br>
-            <a href="#" onclick="signOut();">Sign out</a>
-        </div>
-        <div class="col-sm-6"></div>
-    </div>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script>
+  <button id="google_signout">Signout</button>
 
-        console.log( window.location.hostname.includes( 'localhost' ) );
+  <script>
+      function handleCredentialResponse( response )
+      {
+        console.log( 'id_token', response.credential );
+        const body = { id_token: response.credential };
 
-        var url = ( window.location.hostname.includes( 'localhost' ) )
-            ? 'http://localhost:8080/api/auth/google'
-            : 'https://restserver-curso-fher.herokuapp.com/api/auth/google';
-
-
-        function onSignIn( googleUser )
+      fetch( 'http://localhost:8080/api/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( body )
+      } )
+        .then( a => a.json() )
+        .then( answ =>
         {
+          console.log( answ );
+          localStorage.setItem( 'email', answ.user.email );
+        } )
+        .catch( console.warn );
+    }
 
-            var profile = googleUser.getBasicProfile();
-            console.log( 'ID: ' + profile.getId() ); // Do not send to your backend! Use an ID token instead.
-            console.log( 'Name: ' + profile.getName() );
-            console.log( 'Image URL: ' + profile.getImageUrl() );
-            console.log( 'Email: ' + profile.getEmail() ); // This is null if the 'email' scope is not present.
-
-            var id_token = googleUser.getAuthResponse().id_token;
-            const data = { id_token };
-
-            fetch( url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify( data )
-            } )
-                .then( resp => resp.json() )
-                .then( data => console.log( 'Nuestro server', data ) )
-                .catch( console.log );
-
-        }
-
-        function signOut()
+      const button = document.getElementById( 'google_signout' );
+      button.onclick = () =>
+      {
+        console.log( google.accounts.id );
+        google.accounts.id.disableAutoSelect();
+        google.accounts.id.revoke( localStorage.getItem( 'email' ), done =>
         {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then( function ()
-            {
-                console.log( 'User signed out.' );
-            } );
-        }
+          localStorage.clear();
+          location.reload();
+        } );
+      }
     </script>
-
-</body>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </body>
 
 </html>
