@@ -86,7 +86,4 @@ const googleSignIn = async ( req, res = response ) =>
   }
 };
 
-module.exports = {
-  login,
-  googleSignIn,
-};
+module.exports = { login, googleSignIn };

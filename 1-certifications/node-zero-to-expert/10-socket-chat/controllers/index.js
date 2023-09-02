@@ -11,5 +11,5 @@ module.exports = {
   ...productsController,
   ...searchController,
   ...uploadsController,
-  ...usersController,
+  ...usersController
 };

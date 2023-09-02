@@ -94,6 +94,4 @@ const search = ( req, res = response ) =>
   }
 };
 
-module.exports = {
-  search,
-};
+module.exports = { search };

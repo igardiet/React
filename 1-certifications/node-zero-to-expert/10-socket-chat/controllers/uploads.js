@@ -163,5 +163,5 @@ module.exports = {
   loadFile,
   updateImage,
   updateImageCloudinary,
-  showImage,
+  showImage
 };

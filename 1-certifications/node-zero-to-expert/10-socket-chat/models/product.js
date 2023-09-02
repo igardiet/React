@@ -35,4 +35,5 @@ ProductSchema.methods.toJSON = function ()
   const { __v, status, ...data } = this.toObject();
   return data;
 };
+
 module.exports = model( 'Product', ProductSchema );

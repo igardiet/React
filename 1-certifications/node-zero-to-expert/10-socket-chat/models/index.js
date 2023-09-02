@@ -9,5 +9,5 @@ module.exports = {
   Product,
   Role,
   Server,
-  User,
+  User
 };

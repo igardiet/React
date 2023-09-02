@@ -7,5 +7,5 @@ module.exports = {
   ...validateFields,
   ...validateFile,
   ...validateJWT,
-  ...validateRoles,
+  ...validateRoles
 };

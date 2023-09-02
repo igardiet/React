@@ -7,5 +7,5 @@ module.exports = {
   ...dbValidators,
   ...generateJWT,
   ...googleVerify,
-  ...uploadFile,
+  ...uploadFile
 };

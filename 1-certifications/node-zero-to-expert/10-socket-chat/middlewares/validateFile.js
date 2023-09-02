@@ -11,5 +11,5 @@ const validateFile = ( req, res = response, next ) =>
   next();
 };
 module.exports = {
-  validateFile,
+  validateFile
 };

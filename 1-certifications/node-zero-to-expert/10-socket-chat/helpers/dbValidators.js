@@ -69,5 +69,5 @@ module.exports = {
   userExistsById,
   categoryExistsById,
   productExistsById,
-  allowedCollections,
+  allowedCollections
 };
