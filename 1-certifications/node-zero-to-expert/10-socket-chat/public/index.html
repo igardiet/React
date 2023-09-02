@@ -12,18 +12,20 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="container">
 
-    <h1>Google Signin</h1>
-    <hr>
-
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h1>Google Sign in</h1>
+            <hr>
+            <br>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <br>
+            <a href="#" onclick="signOut();">Sign out</a>
+        </div>
+        <div class="col-sm-6"></div>
+    </div>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <a href="#" onclick="signOut();">Sign out</a>
-
     <script>
 
         console.log( window.location.hostname.includes( 'localhost' ) );
