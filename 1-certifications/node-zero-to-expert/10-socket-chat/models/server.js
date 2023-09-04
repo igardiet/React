@@ -2,7 +2,9 @@ const express = require( 'express' );
 const fileUpload = require( 'express-fileupload' );
 const cors = require( 'cors' );
 const gracefulFs = require( 'graceful-fs' );
+const { createServer } = require( 'http' );
 const { dbConnection } = require( '../database/config' );
+const { socketController } = require( "../sockets/controller" );
 
 class Server
 {
@@ -10,6 +12,9 @@ class Server
   {
     this.app = express();
     this.port = process.env.PORT || 3000;
+    this.server = createServer( this.app );
+    this.io = require( 'socket.io' )( this.server );
+
     this.paths = {
       auth: '/api/auth',
       search: '/api/search',
@@ -21,6 +26,7 @@ class Server
     this.connectDB(); // Connection to database
     this.middlewares(); // Middlewares
     this.routes(); // App routes
+    this.sockets();  // Sockets
   }
 
   async connectDB()
@@ -59,9 +65,14 @@ class Server
     this.app.use( this.paths.users, require( '../routes/users' ) );
   }
 
+  sockets()
+  {
+    this.io.on( 'connection', socketController );
+  }
+
   listen()
   {
-    const server = this.app.listen( this.port || 3000, () =>
+    const server = this.server.listen( this.port, () =>
     {
       console.log( `Server running in port: ${this.port}` );
     } );
