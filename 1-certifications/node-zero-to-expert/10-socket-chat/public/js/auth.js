@@ -25,6 +25,7 @@ myForm.addEventListener( 'submit', event =>
         {
             if ( msg ) return console.error( msg );
             localStorage.setItem( 'token', token );
+            window.location = 'chat.html';
         } )
         .catch( err => console.log( err ) );
 } );
@@ -41,14 +42,10 @@ function handleCredentialResponse( response )
             body: JSON.stringify( body )
         } )
         .then( answ => answ.json() )
-        // .then( answ =>
-        // {
-        //     console.log(answ);
-        //     localStorage.setItem( 'email', answ.user.email );
-        // } )
         .then( ( { token } ) =>
         {
             localStorage.setItem( 'token', token );
+            window.location = 'chat.html';
         } )
         .catch( console.error );
 }
