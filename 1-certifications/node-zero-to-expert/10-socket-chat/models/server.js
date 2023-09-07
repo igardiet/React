@@ -1,7 +1,6 @@
 const express = require( 'express' );
 const fileUpload = require( 'express-fileupload' );
 const cors = require( 'cors' );
-const gracefulFs = require( 'graceful-fs' );
 const { createServer } = require( 'http' );
 const { dbConnection } = require( '../database/config' );
 const { socketController } = require( "../sockets/controller" );
@@ -67,7 +66,7 @@ class Server
 
   sockets()
   {
-    this.io.on( 'connection', socketController );
+    this.io.on( 'connection', ( socket ) => socketController( socket, this.io ) );
   }
 
   listen()
@@ -75,17 +74,6 @@ class Server
     const server = this.server.listen( this.port, () =>
     {
       console.log( `Server running in port: ${this.port}` );
-    } );
-
-    // Graceful shutdown
-    process.on( 'SIGINT', () =>
-    {
-      console.log( 'Shutting down server...' );
-      server.close( () =>
-      {
-        gracefulFs.close(); // Close graceful-fs to ensure file operations are completed
-        process.exit( 0 );
-      } );
     } );
   }
 }
