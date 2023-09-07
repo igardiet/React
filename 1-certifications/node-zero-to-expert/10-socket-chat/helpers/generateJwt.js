@@ -32,10 +32,7 @@ const findJWT = async ( token = '' ) =>
 {
   try
   {
-    if ( token.length < 10 )
-    {
-      return null;
-    };
+    if ( token.length < 10 ) return null;
 
     const { uid } = jwt.verify( token, process.env.SECRETORPRIVATEKEY );
     const user = await User.findById( uid );
@@ -43,12 +40,8 @@ const findJWT = async ( token = '' ) =>
     if ( user )
     {
       if ( user.status )
-      {
         return user;
-      } else
-      {
-        return null;
-      }
+      return null;
     }
     else
     {
