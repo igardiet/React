@@ -8,7 +8,7 @@ let socket = null;
 const txtUid = document.querySelector( '#txtUid' );
 const txtMessage = document.querySelector( '#txtMessage' );
 const ulUsers = document.querySelector( '#ulUsers' );
-const ulMesagges = document.querySelector( '#ulMesagges' );
+const ulMessages = document.querySelector( '#ulMessages' );
 const btnExit = document.querySelector( '#btnExit' );
 
 const validateJWT = async () =>
@@ -41,27 +41,21 @@ const connectSocket = async () =>
                 'x-token': localStorage.getItem( 'token' )
             }
         } );
-    socket.on( 'connect', () =>
-    {
-        console.log( 'Sockets online' );
-    } );
-    socket.on( 'disconnect', () =>
-    {
-        console.log( 'Sockets offline' );
-    } );
-    socket.on( 'receive-messages', () =>
-    {
-        // TODO
-    } );
-    socket.on( 'active-users', ( payload ) =>
-    {
-        console.log( payload );
-    } );
-    socket.on( 'private-message', () =>
-    {
-        // TODO
-    } );
+
+    socket.on( 'connect', () => console.log( 'Sockets online' ) );
+
+    socket.on( 'disconnect', () => console.log( 'Sockets offline' ) );
+
+    socket.on( 'receive-messages', drawMessages );
+
+    socket.on( 'active-users', drawUsers );
+
+    socket.on( 'private-message', () => '' );
 };
+
+
+
+
 
 const main = async () =>
 {
