@@ -1,37 +1,39 @@
-module.exports = class Users
+class Users
 {
     constructor()
     {
-        this.users = [];
+        this.people = [];
     }
 
-    addUser( id, name )
+    addPerson( id, name )
     {
-        let user = { id, name };
-        this.users.push( user );
-        return this.users;
+        let person = { id, name };
+        this.people.push( person );
+        return this.people;
     }
 
-    getUser( id )
+    getPerson( id )
     {
-        let user = this.users.filter( user => user.id === id )[0];
-        return user;
+        let person = this.people.filter( person => person.id === id )[0];
+        return person;
     }
 
-    getUsers()
+    getPeople()
     {
-        return this.users;
+        return this.people;
     }
 
-    getUsersByRoom( room )
+    getPeopleByRoom( room )
     {
         // TODO
     }
 
-    deleteUser( id )
+    deletePerson( id )
     {
-        let deletedUser = this.getUser( id );
-        this.users = this.users.filter( user => user.id != id );
-        return deletedUser;
+        let deletedPerson = this.getPerson( id );
+        this.people = this.people.filter( person => person.id != id );
+        return deletedPerson;
     }
 };
+
+module.exports = { Users };
