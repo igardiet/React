@@ -50,7 +50,7 @@ const connectSocket = async () =>
 
     socket.on( 'active-users', drawUsers );
 
-    socket.on( 'private-message', () => '' );
+    socket.on( 'private-message', ( payload ) => console.log( 'Private:', payload ) );
 };
 
 const drawUsers = ( users = [] ) =>
