@@ -25,9 +25,12 @@ socket.on( 'connect', () =>
 
 socket.on( 'disconnect', () => console.log( 'Server connection has been lost' ) );
 
-socket.emit( 'sendMessage', {
-    user: 'User',
-    message: 'Message'
-}, ( answer ) => console.log( 'Server response: ', answer ) );
+socket.emit( 'sendMessage',
+    {
+        user: 'User',
+        message: 'Message'
+    }, ( answer ) => console.log( 'Server response: ', answer ) );
 
-socket.on( 'sendMessage', ( message ) => console.log( 'Server:', message ) );
+socket.on( 'createMessage', ( message ) => console.log( 'Server:', message ) );
+
+socket.on( 'personList', ( people ) => console.log( people ) );
