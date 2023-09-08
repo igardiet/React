@@ -71,6 +71,24 @@ const drawUsers = ( users = [] ) =>
     ulUsers.innerHTML = usersHtml;
 };
 
+const drawMessages = ( messages = [] ) =>
+{
+    let messagesHTML = '';
+    messages.forEach( ( { name, message } ) =>
+    {
+        messagesHTML +=
+            `
+            <li>
+                <p>
+                    <span class="text-primary">${name}: </span>
+                    <span>${message}</span>
+                </p>
+            </li>
+        `;
+    } );
+    ulMessages.innerHTML = messagesHTML;
+};
+
 const main = async () =>
 {
     await validateJWT();
