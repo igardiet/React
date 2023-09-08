@@ -1,31 +1,21 @@
+const { Users } = require( "../classes/users" );
 const { io } = require( '../server' );
+
+const users = new Users();
 
 io.on( 'connection', ( client ) =>
 {
-    console.log( 'User connected' );
-
-    client.emit( 'sendMessage', {
-        usuario: 'Admin',
-        mensaje: 'Welcome to the app'
-    } );
-
-    client.on( 'disconnect', () => console.log( 'User disconnected' ) );
-
-    client.on( 'sendMessage', ( data, callback ) =>
+    client.on( 'enterChat', ( data, callback ) =>
     {
-        console.log( data );
-
-        client.broadcast.emit( 'sendMessage', data );
-
-        // if (mensaje.usuario) {
-        //     callback({
-        //         resp: 'TODO SALIO BIEN!'
-        //     });
-
-        // } else {
-        //     callback({
-        //         resp: 'TODO SALIO MAL!!!!!!!!'
-        //     });
-        // }
+        if ( !data.name )
+        {
+            return callback
+                ( {
+                    error: true,
+                    message: 'Name is mandatory'
+                } );
+        }
+        let people = users.addPerson( client.id, data.name );
+        callback( people );
     } );
 } );
