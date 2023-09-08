@@ -11,11 +11,18 @@ const socketController = async ( socket = new Socket(), io ) =>
 
     chatMessages.connectUser( user );
     io.emit( 'active-users', chatMessages.usersArray );
+    socket.emit( 'receive-messages', chatMessages.last10 );
 
     socket.on( 'disconnect', () =>
     {
         chatMessages.disconnectUser( user.id );
         io.emit( 'active-users', chatMessages.usersArray );
+    } );
+
+    socket.on( 'send-message', ( { uid, message } ) =>
+    {
+        chatMessages.sendMessage( user.id, user.name, message );
+        io.emit( 'receive-messages', chatMessages.last10 );
     } );
 };
 
