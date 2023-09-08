@@ -53,9 +53,23 @@ const connectSocket = async () =>
     socket.on( 'private-message', () => '' );
 };
 
-
-
-
+const drawUsers = ( users = [] ) =>
+{
+    let usersHtml = '';
+    users.forEach( ( { name, uid } ) =>
+    {
+        usersHtml +=
+            `
+            <li>
+                <p>
+                    <h5 class="text-success">${name}</h5>
+                    <span class="fs-6 text-muted">${uid}</span>
+                </p>
+            </li>
+        `;
+    } );
+    ulUsers.innerHTML = usersHtml;
+};
 
 const main = async () =>
 {
