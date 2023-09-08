@@ -12,6 +12,7 @@ const socketController = async ( socket = new Socket(), io ) =>
     chatMessages.connectUser( user );
     io.emit( 'active-users', chatMessages.usersArray );
     socket.emit( 'receive-messages', chatMessages.last10 );
+    socket.join( user.id );
 
     socket.on( 'disconnect', () =>
     {
@@ -21,8 +22,14 @@ const socketController = async ( socket = new Socket(), io ) =>
 
     socket.on( 'send-message', ( { uid, message } ) =>
     {
-        chatMessages.sendMessage( user.id, user.name, message );
-        io.emit( 'receive-messages', chatMessages.last10 );
+        if ( uid )
+        {
+            socket.to( uid ).emit( 'private-message', { from: user.name, message } );
+        } else
+        {
+            chatMessages.sendMessage( user.id, user.name, message );
+            io.emit( 'receive-messages', chatMessages.last10 );
+        }
     } );
 };
 
