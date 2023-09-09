@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0; // Version of the Solidity compiler to be used
 
 // Declare the start of a solidity smart contract
