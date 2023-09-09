@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-// modifiers (view, pure, payable)
+// Modifiers (view, pure, payable)
 contract Contract5 {
     string public name = "String";
     uint public balance;
@@ -24,4 +24,4 @@ contract Contract5 {
 
 // MEMORY: This is a storage location specifier. In Solidity, there are different places where data can be stored, such as memory, storage, and calldata.
 // MEMORY: This is used for temporary data storage within a function. Data stored in memory is cleared when the function execution ends. It's often used for variables that don't need to persist beyond the function's scope.
-// returns (string memory) means that the function getName will return a value of type string, and this string data is stored in the function's memory space. It's important to use memory for return types like strings or arrays, as these types can vary in size, and storing them in memory is more efficient than using storage or other storage locations.
+// Returns (string memory) means that the function getName will return a value of type string, and this string data is stored in the function's memory space. It's important to use memory for return types like strings or arrays, as these types can vary in size, and storing them in memory is more efficient than using storage or other storage locations.
