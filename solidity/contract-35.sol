@@ -7,7 +7,8 @@ contract Contract35 {
     address payable wallet;
 
     // trigger event
-    event Purchase(address _buyer, uint256 _amount);
+    // index to filter events that are only from certain buyers
+    event Purchase(address indexed _buyer, uint256 _amount);
 
     constructor(address payable _wallet) {
         wallet = _wallet;
@@ -27,3 +28,7 @@ contract Contract35 {
         emit Purchase(msg.sender, 1);
     }
 }
+
+// EVENTS USE CASES:
+// reload app state when event's been triggered
+// get entire event stream from a smart contract, see all purchase events that ever happend inside smart contract
