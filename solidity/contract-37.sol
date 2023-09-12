@@ -11,9 +11,10 @@ contract ERC20Token {
         name = _name; // Sets the name variable when the contract is deployed, initializing the token name
     }
 
-    // function mint() public {
-    // balances[tx.origin]++; // This function allows the contract to "mint" (create) new tokens. It increases the balance of the sender's address (tx.origin) by 1
-    // }
+    // Virtual keyword to indicate that it's intended to be overridden by derived contracts
+    function mint() public virtual {
+        balances[tx.origin]++; // This function allows the contract to "mint" (create) new tokens. It increases the balance of the sender's address (tx.origin) by 1
+    }
 }
 
 // Contract37 is derived from the ERC20Token contract using inheritance. It inherits the state variables and functions of ERC20Token and extends them.
@@ -27,8 +28,9 @@ contract Contract37 is ERC20Token {
         symbol = _symbol;
     }
 
-    function mint() public {
-        // super.mint(); // Call function to update balances
+    // Override the function in the parent contract (ERC20Token)
+    function mint() public override {
+        super.mint(); // Call function to update balances
         ownerCount++; // Increment the number of peoplee who own the token
         owners.push(msg.sender); // Add sender to array of owners
     }
