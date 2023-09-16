@@ -159,6 +159,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ignore selected styles
 accreditations/node-zero-to-expert/03-node-bases/exit/*.txt
 accreditations/node-zero-to-expert/06-webserver/public
 accreditations/node-zero-to-expert/07-restserver/uploads/products
