@@ -31,7 +31,7 @@ socket.on( 'disconnect', () => console.log( 'Server connection has been lost' ) 
 //         message: 'Message'
 //     }, ( answer ) => console.log( 'Server response: ', answer ) );
 
-socket.on( 'createMessage', ( message ) => console.log( 'Server:', message ) );
+socket.on( 'createMessage', ( message ) => renderMessages( message ) );
 
 socket.on( 'personList', ( people ) => renderUsers( people ) );
 
