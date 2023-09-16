@@ -26,18 +26,39 @@ const renderUsers = ( people ) =>
     divUsers.html( html );
 };
 
-const renderMessages = ( message ) =>
+const renderMessages = ( message, me ) =>
 {
-    let html =
+    let html = '';
+    let date = new Date( message.date );
+    let hour = date.getHours() + ':' + date.getMinutes();
 
+    const adminClass = 'info';
+    if ( message.name === 'Admin' )
+    {
+        adminClass = 'danger';
+    }
+
+    if ( me )
+    {
+        html += '<li class="reverse">';
+        html += '    <div class="chat-content">';
+        html += '        <h5>' + message.name + '</h5>';
+        html += '        <div class="box bg-light-inverse">' + message.message + '</div>';
+        html += '    </div>';
+        html += '    <div class="chat-img"><img src="assets/images/users/5.jpg" alt="user" /></div>';
+        html += '    <div class="chat-time">' + hour + '</div>';
+        html += '</li>';
+    } else
+    {
         html += '<li class="animated fadeIn">';
-    html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /> </div>';
-    html += '    <div class="chat-content">';
-    html += '        <h5>' + message.name + '</h5>';
-    html += '        <div class="box bg-light-info">' + message.message + '</div>';
-    html += '    </div>';
-    html += '    <div class="chat-time">10:56 am</div>';
-    html += '</li>';
+        if ( message.name !== 'Admin' ) html += '<div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /> </div>';
+        html += '    <div class="chat-content">';
+        html += '        <h5>' + message.name + '</h5>';
+        html += '        <div class="box bg-light-' + adminClass + '">' + message.message + '</div>';
+        html += '    </div>';
+        html += '    <div class="chat-time">' + hour + '</div>';
+        html += '</li>';
+    }
 
     divChatbox.append( html );
 };
@@ -66,7 +87,7 @@ sendForm.on( 'submit', function ( e )
         }, ( message ) =>
     {
         txtMessage.val( '' ).focus();
-        renderMessages( message );
+        renderMessages( message, true );
     }
     );
 } );
