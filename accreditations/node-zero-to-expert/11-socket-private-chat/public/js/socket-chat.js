@@ -1,6 +1,5 @@
 const socket = io();
-
-const params = new URLSearchParams( window.location.search );
+let params = new URLSearchParams( window.location.search );
 
 if ( !params.has( 'name' ) || !params.has( 'room' ) )
 {
@@ -20,7 +19,7 @@ socket.on( 'connect', () =>
 
     socket.emit( 'enterChat', user, ( answer ) =>
     {
-        console.log( 'Users connected', answer );
+        renderUsers( answer );
     } );
 } );
 
@@ -34,6 +33,6 @@ socket.on( 'disconnect', () => console.log( 'Server connection has been lost' ) 
 
 socket.on( 'createMessage', ( message ) => console.log( 'Server:', message ) );
 
-socket.on( 'personList', ( people ) => console.log( people ) );
+socket.on( 'personList', ( people ) => renderUsers( people ) );
 
 socket.on( 'privateMessage', ( message ) => console.log( 'Private message:', message ) );
