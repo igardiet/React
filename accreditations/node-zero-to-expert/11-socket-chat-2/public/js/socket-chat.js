@@ -2,15 +2,16 @@ const socket = io();
 
 const params = new URLSearchParams( window.location.search );
 
-if ( !params.has( 'name' ) )
+if ( !params.has( 'name' ) || !params.has( 'room' ) )
 {
     window.location = 'index.html';
-    throw new Error( 'Name is mandatory' );
+    throw new Error( 'Name and room are mandatory' );
 }
 
 const user =
 {
-    name: params.get( 'name' )
+    name: params.get( 'name' ),
+    room: params.get( 'room' )
 };
 
 socket.on( 'connect', () =>
@@ -25,12 +26,14 @@ socket.on( 'connect', () =>
 
 socket.on( 'disconnect', () => console.log( 'Server connection has been lost' ) );
 
-socket.emit( 'sendMessage',
-    {
-        user: 'User',
-        message: 'Message'
-    }, ( answer ) => console.log( 'Server response: ', answer ) );
+// socket.emit( 'createMessage',
+//     {
+//         name: 'User',
+//         message: 'Message'
+//     }, ( answer ) => console.log( 'Server response: ', answer ) );
 
 socket.on( 'createMessage', ( message ) => console.log( 'Server:', message ) );
 
 socket.on( 'personList', ( people ) => console.log( people ) );
+
+socket.on( 'privateMessage', ( message ) => console.log( 'Private message:', message ) );
