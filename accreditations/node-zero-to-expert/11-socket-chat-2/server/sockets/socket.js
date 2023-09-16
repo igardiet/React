@@ -21,7 +21,12 @@ io.on( 'connection', ( client ) =>
         callback( people );
     } );
 
-    
+    client.on( 'createMessage', ( data ) =>
+    {
+        let person = users.getPerson( client.id );
+        let message = createMessage( person.name, data.message );
+        client.broadcast.emit( 'createMessage', message );
+    } );
 
     client.on( 'disconnect', () =>
     {
