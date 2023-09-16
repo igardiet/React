@@ -19,3 +19,11 @@ const renderUsers = ( people ) =>
     divUsers.html( html );
 };
 
+divUsers.on( 'click', 'a', () =>
+{
+    const id = $( this ).data( 'id' );
+    if ( id )
+    {
+        console.log( id );
+    }
+} );
