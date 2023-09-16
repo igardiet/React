@@ -51,3 +51,22 @@ divUsers.on( 'click', 'a', () =>
     }
 } );
 
+sendForm.on( 'submit', function ( e )
+{
+    e.preventDefault();
+    if ( txtMessage.val().trim().length === 0 )
+    {
+        return;
+    }
+
+    socket.emit( 'createMessage',
+        {
+            name,
+            message: txtMessage.val()
+        }, ( message ) =>
+    {
+        txtMessage.val( '' ).focus();
+        renderMessages( message );
+    }
+    );
+} );
