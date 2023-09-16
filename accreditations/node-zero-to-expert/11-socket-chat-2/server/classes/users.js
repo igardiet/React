@@ -5,9 +5,9 @@ class Users
         this.people = [];
     }
 
-    addPerson( id, name )
+    addPerson( id, name, room )
     {
-        let person = { id, name };
+        let person = { id, name, room };
         this.people.push( person );
         return this.people;
     }
@@ -23,10 +23,7 @@ class Users
         return this.people;
     }
 
-    getPeopleByRoom( room )
-    {
-        // TODO
-    }
+   
 
     deletePerson( id )
     {
