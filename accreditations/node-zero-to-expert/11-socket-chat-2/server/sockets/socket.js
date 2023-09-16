@@ -35,6 +35,9 @@ io.on( 'connection', ( client ) =>
         client.broadcast.to( deletedPerson.room ).emit( 'createMessage', createMessage( 'Admin', `${deletedPerson.name} has left the chat` ) );
         client.broadcast.to( deletedPerson.room ).emit( 'personList', users.getPeopleByRoom( deletedPerson.room ) );
     } );
-
-    
+    client.on( 'privateMessage', data =>
+    {
+        let person = users.getPerson( client.id );
+        client.broadcast.to( data.towards ).emit( 'privateMessage', createMessage( person.name, data.message ) );
+    } );
 } );
