@@ -1,5 +1,12 @@
 let params = new URLSearchParams( window.location.search );
+
+const name = params.get( 'name' );
+const room = params.get( 'room' );
+
 const divUsers = $( '#divUsers' );
+const sendForm = $( '#sendForm' );
+const txtMessage = $( '#txtMessage' );
+const divChatbox = $( '#divChatbox' );
 
 const renderUsers = ( people ) =>
 {
@@ -19,6 +26,22 @@ const renderUsers = ( people ) =>
     divUsers.html( html );
 };
 
+const renderMessages = ( message ) =>
+{
+    let html =
+
+        html += '<li class="animated fadeIn">';
+    html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /> </div>';
+    html += '    <div class="chat-content">';
+    html += '        <h5>' + message.name + '</h5>';
+    html += '        <div class="box bg-light-info">' + message.message + '</div>';
+    html += '    </div>';
+    html += '    <div class="chat-time">10:56 am</div>';
+    html += '</li>';
+
+    divChatbox.append( html );
+};
+
 divUsers.on( 'click', 'a', () =>
 {
     const id = $( this ).data( 'id' );
@@ -27,3 +50,4 @@ divUsers.on( 'click', 'a', () =>
         console.log( id );
     }
 } );
+
