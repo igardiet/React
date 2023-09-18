@@ -55,17 +55,33 @@ export const postUser = async ( req: Request, res: Response ) =>
 }
 
 
-export const putUser = ( req: Request, res: Response ) =>
+export const putUser = async ( req: Request, res: Response ) =>
 {
     const { id } = req.params;
     const { body } = req;
 
-    res.json(
+    try
+    {
+        const user = await User.findByPk( id );
+        if ( !user )
         {
-            msg: 'putUser',
-            body,
-            id
-        } )
+            return res.status( 404 ).json(
+                {
+                    msg: `There is no user with id nº ${ id }`
+                } );
+        }
+        await user.update( body );
+        res.json( user );
+
+    } catch ( error )
+    {
+        console.log( error );
+        res.status( 500 ).json(
+            {
+                msg: 'Internal Server Error'
+            }
+        )
+    }
 }
 
 export const deleteUser = ( req: Request, res: Response ) =>
