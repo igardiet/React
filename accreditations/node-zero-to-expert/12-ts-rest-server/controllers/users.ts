@@ -24,6 +24,37 @@ export const getUser = async ( req: Request, res: Response ) =>
     }
 }
 
+export const postUser = async ( req: Request, res: Response ) =>
+{
+    const { body } = req;
+
+    try
+    {
+        const emailExists = await User.findOne(
+            {
+                where: { email: body.email }
+            } )
+
+        if ( emailExists ) 
+        {
+            return res.status( 400 ).json(
+                {
+                    msg: `The email ${ body.email } is already registered`
+                } )
+        }
+
+        const user = await User.create( body );
+        res.json( { user } );
+    } catch ( error )
+    {
+        console.log( error );
+        res.status( 500 ).json( {
+            msg: 'Internal Server Error'
+        } )
+    }
+}
+
+
 export const putUser = ( req: Request, res: Response ) =>
 {
     const { id } = req.params;
