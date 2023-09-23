@@ -168,4 +168,10 @@ accreditations/node-zero-to-expert/11-socket-private-chat/public/assets
 accreditations/node-zero-to-expert/11-socket-private-chat/public/css
 accreditations/node-zero-to-expert/11-socket-private-chat/public/scss
 accreditations/node-zero-to-expert/11-socket-private-chat/public/js/libs
+
+# C
 c/basics/a.out
+
+# Java
+accreditations/java-masterclass/*.class
+accreditations/java-masterclass/formatting.xml
