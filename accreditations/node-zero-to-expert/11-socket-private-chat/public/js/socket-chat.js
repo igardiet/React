@@ -1,7 +1,6 @@
 const socket = io();
-let params = new URLSearchParams( window.location.search );
 
-if ( !params.has( 'name' ) || !params.has( 'room' ) )
+if ( !params.has( 'name' ) || !params.has( 'sala' ) )
 {
     window.location = 'index.html';
     throw new Error( 'Name and room are mandatory' );
@@ -10,7 +9,7 @@ if ( !params.has( 'name' ) || !params.has( 'room' ) )
 const user =
 {
     name: params.get( 'name' ),
-    room: params.get( 'room' )
+    room: params.get( 'sala' )
 };
 
 socket.on( 'connect', () =>
