@@ -12,6 +12,8 @@ import './index.css';
 // import { Memorize } from './memos/Memorize';
 // import { MemoHook } from './memos/MemoHook';
 // import { CallbackHook } from './memos/CallbackHook';
-import { Parent } from './homework-memo/Parent';
+// import { Parent } from './homework-memo/Parent';
+// import './useReducer/intro-reducer';
+import { TodoApp } from "./useReducer/TodoApp";
 
-ReactDOM.createRoot( document.getElementById( 'root' ) ).render( <Parent /> );
+ReactDOM.createRoot( document.getElementById( 'root' ) ).render( <TodoApp /> );
