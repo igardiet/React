@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useCounter } from '../hooks';
 import { Small } from './Small';
 
-export const Memorize = () => {
-  const { counter, increment } = useCounter(0);
-  const [show, setShow] = useState(true);
+export const Memorize = () =>
+{
+  const { counter, increment } = useCounter( 0 );
+  const [show, setShow] = useState( true );
 
   return (
     <>
@@ -17,9 +18,9 @@ export const Memorize = () => {
       </button>
       <button
         className='btn btn-outline-primary'
-        onClick={() => setShow(!show)}
+        onClick={() => setShow( !show )}
       >
-        Show/Hide {JSON.stringify(show)}
+        Show/Hide {JSON.stringify( show )}
       </button>
     </>
   );

@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 
-export const FocusScreen = () => {
+export const FocusScreen = () =>
+{
   const inputRef = useRef();
-  const onClick = () => {
+  const onClick = () =>
+  {
     // document.querySelector('input').select();
     // console.log(inputRef);
     inputRef.current.select();

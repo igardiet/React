@@ -14,4 +14,4 @@ import './index.css';
 // import { CallbackHook } from './memos/CallbackHook';
 import { Parent } from './homework-memo/Parent';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Parent />);
+ReactDOM.createRoot( document.getElementById( 'root' ) ).render( <Parent /> );

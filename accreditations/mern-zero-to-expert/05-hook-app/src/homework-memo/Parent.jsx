@@ -1,13 +1,15 @@
 import { Son } from './Son';
 import { useCallback, useState } from 'react';
 
-export const Parent = () => {
+export const Parent = () =>
+{
   const numbers = [2, 4, 6, 8, 10];
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState( 0 );
 
-  const increment = useCallback((num) => {
-    setValue((oldValue) => oldValue + num);
-  }, []);
+  const increment = useCallback( ( num ) =>
+  {
+    setValue( ( oldValue ) => oldValue + num );
+  }, [] );
 
   return (
     <div>
@@ -16,9 +18,9 @@ export const Parent = () => {
 
       <hr />
 
-      {numbers.map((n) => (
+      {numbers.map( ( n ) => (
         <Son key={n} number={n} increment={increment} />
-      ))}
+      ) )}
       {/* <Son /> */}
     </div>
   );

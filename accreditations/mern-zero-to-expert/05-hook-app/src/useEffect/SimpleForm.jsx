@@ -1,32 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Message } from './Message';
 
-export const SimpleForm = () => {
-  const [formState, setFormState] = useState({
+export const SimpleForm = () =>
+{
+  const [formState, setFormState] = useState( {
     username: 'username',
     email: 'email',
-  });
+  } );
   const { username, email } = formState;
 
-  const onInputChange = ({ target }) => {
+  const onInputChange = ( { target } ) =>
+  {
     const { name, value } = target;
-    setFormState({
+    setFormState( {
       ...formState,
       [name]: value,
-    });
+    } );
   };
 
-  useEffect(() => {
+  useEffect( () =>
+  {
     // console.log('useEffect!');
-  }, []);
+  }, [] );
 
-  useEffect(() => {
+  useEffect( () =>
+  {
     // console.log('formState!');
-  }, [formState]);
+  }, [formState] );
 
-  useEffect(() => {
+  useEffect( () =>
+  {
     // console.log('email!');
-  }, [email]);
+  }, [email] );
 
   return (
     <>

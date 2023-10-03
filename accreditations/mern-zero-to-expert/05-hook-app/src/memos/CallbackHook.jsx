@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ShowIncrement } from './ShowIncrement';
 
-export const CallbackHook = () => {
-  const [counter, setCounter] = useState(0);
+export const CallbackHook = () =>
+{
+  const [counter, setCounter] = useState( 0 );
 
-  const incrementParent = useCallback((value) => {
-    setCounter((c) => c + value);
-  }, []);
-  useEffect(() => {
+  const incrementParent = useCallback( ( value ) =>
+  {
+    setCounter( ( c ) => c + value );
+  }, [] );
+  useEffect( () =>
+  {
     // incrementParent();
-  }, [incrementParent]);
+  }, [incrementParent] );
 
   //   const incrementParent = () => {
   //     setCounter(counter + 1)

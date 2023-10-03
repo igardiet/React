@@ -1,9 +1,11 @@
-export const ShowIncrement = ({ increment }) => {
+export const ShowIncrement = ( { increment } ) =>
+{
   return (
     <button
       className='btn btn-danger'
-      onClick={() => {
-        increment(5);
+      onClick={() =>
+      {
+        increment( 5 );
       }}
     >
       Increment

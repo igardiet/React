@@ -1,8 +1,9 @@
 import { useCounter, useFetch } from '../hooks';
 import { LoadingQuote, Quote } from '../examples';
 
-export const Layout = () => {
-  const { counter, increment } = useCounter(1);
+export const Layout = () =>
+{
+  const { counter, increment } = useCounter( 1 );
   const { data, isLoading, hasError } = useFetch(
     `https://api.breakingbadquotes.xyz/v1/quotes/${counter}`
   );
