@@ -32,6 +32,15 @@ export const TodoApp = () =>
         dispatch( action );
     };
 
+    const handleDeleteTodo = ( id ) =>
+    {
+        dispatch(
+            {
+                type: 'Remove Todo',
+                payload: id
+            } );
+    };
+
     return (
         <>
             <h1>TodoApp: 10 |<small>Pending: 2</small></h1>
