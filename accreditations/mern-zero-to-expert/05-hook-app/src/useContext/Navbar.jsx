@@ -29,9 +29,6 @@ export const Navbar = () =>
                         >
                             Login
                         </NavLink>
-                        <li className="nav-item">
-                            <a className="nav-link active" href="#">Features</a>
-                        </li>
                     </ul>
                 </div>
             </div>
