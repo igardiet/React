@@ -6,13 +6,13 @@ export const useCounter = ( initialValue = 0 ) =>
 
   const increment = ( value = 1 ) =>
   {
-    setCounter( counter + value );
+    setCounter( current => current + value );
   };
 
   const decrement = ( value = 1 ) =>
   {
     if ( counter === 0 ) return; // cart
-    setCounter( counter - value );
+    setCounter( current => current - value );
   };
 
   const reset = () =>
