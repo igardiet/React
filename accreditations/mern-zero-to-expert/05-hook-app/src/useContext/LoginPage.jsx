@@ -3,7 +3,7 @@ import { UserContext } from "./context/UserContext";
 
 export const LoginPage = () =>
 {
-    const { user } = useContext( UserContext );
+    const { user, setUser } = useContext( UserContext );
 
     return (
         <>
@@ -12,6 +12,15 @@ export const LoginPage = () =>
             <pre>
                 {JSON.stringify( user, null, 3 )}
             </pre>
+            <button
+                className="btn btn-primary"
+                onClick={() => setUser(
+                    {
+                        id: 123, name: 'Bruce', email: 'brucew@gmail.com'
+                    } )
+                }
+            >Establish User
+            </button>
         </>
     );
 };
