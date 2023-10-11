@@ -11,7 +11,7 @@ export const MultipleCustomHooks = () =>
 
   return (
     <>
-      <h1>Products</h1>
+      <h1>Quotes</h1>
       <hr />
       {isLoading ? <LoadingQuote /> : <Quote author={author} quote={quote} />}
       <button
