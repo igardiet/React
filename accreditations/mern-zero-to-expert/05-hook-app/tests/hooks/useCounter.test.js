@@ -1,5 +1,5 @@
-const { renderHook, act } = require( "@testing-library/react" );
-const { useCounter } = require( "../../src/hooks/useCounter" );
+const { renderHook, act } = require( '@testing-library/react' );
+const { useCounter } = require( '../../src/hooks/useCounter' );
 
 describe( 'Tests in useCounter', () =>
 {

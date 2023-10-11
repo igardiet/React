@@ -1,5 +1,5 @@
-const { renderHook, act } = require( "@testing-library/react" );
-const { useForm } = require( "../../src/hooks/useForm" );
+const { renderHook, act } = require( '@testing-library/react' );
+const { useForm } = require( '../../src/hooks/useForm' );
 
 describe( 'Tests in useFrom', () =>
 {
