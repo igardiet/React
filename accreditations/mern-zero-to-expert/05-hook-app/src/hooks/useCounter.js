@@ -11,7 +11,7 @@ export const useCounter = ( initialValue = 0 ) =>
 
   const decrement = ( value = 1 ) =>
   {
-    if ( counter === 0 ) return; // carrito / cart
+    if ( counter === 0 ) return; // cart
     setCounter( counter - value );
   };
 
