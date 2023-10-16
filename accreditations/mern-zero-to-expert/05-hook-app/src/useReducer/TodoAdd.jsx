@@ -22,17 +22,17 @@ export const TodoAdd = ( { onNewTodo } ) =>
     return (
         <form onSubmit={onFormSubmit}>
             <input
-                type="text"
-                className="form-control"
-                placeholder="What is there to do ?"
-                name="description"
+                type='text'
+                className='form-control'
+                placeholder='What is there to do ?'
+                name='description'
                 value={description}
                 onChange={onInputChange}
             />
             <button
-                type="submit"
-                className="btn btn-outline-primary
-                 mt-1"
+                type='submit'
+                className='btn btn-outline-primary
+                 mt-1'
             >Add</button>
         </form>
     );

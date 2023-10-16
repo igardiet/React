@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { UserContext } from "./context/UserContext";
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
 
 export const LoginPage = () =>
 {
@@ -13,7 +13,7 @@ export const LoginPage = () =>
                 {JSON.stringify( user, null, 3 )}
             </pre>
             <button
-                className="btn btn-primary"
+                className='btn btn-primary'
                 onClick={() => setUser(
                     {
                         id: 123, name: 'Bruce', email: 'brucew@gmail.com'

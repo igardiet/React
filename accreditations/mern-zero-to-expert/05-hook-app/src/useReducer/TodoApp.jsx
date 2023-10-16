@@ -10,15 +10,15 @@ export const TodoApp = () =>
         <>
             <h1>TodoApp: {todosCount} | <small>Pending: {pendingTodosCount}</small></h1>
             <hr />
-            <div className="row">
-                <div className="col-7">
+            <div className='row'>
+                <div className='col-7'>
                     <TodoList
                         todos={todos}
                         onDeleteTodo={handleDeleteTodo}
                         onToggleTodo={handleToggleTodo}
                     />
                 </div>
-                <div className="col-5">
+                <div className='col-5'>
                     <h4>Add Task</h4>
                     <hr />
                     <TodoAdd onNewTodo={handleNewTodo} />

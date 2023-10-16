@@ -1,4 +1,5 @@
-import { UserContext } from "./context/UserContext";
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
 
 export const HomePage = () =>
 {
@@ -8,7 +9,9 @@ export const HomePage = () =>
         <>
             <h1>HomePage <small>{user?.name}</small></h1>
             <hr />
-            <pre>{JSON.stringify( user, null, 3 )}</pre>
+            <pre aria-label='pre'>
+                {JSON.stringify( user, null, 3 )}
+            </pre>
         </>
     );
 };

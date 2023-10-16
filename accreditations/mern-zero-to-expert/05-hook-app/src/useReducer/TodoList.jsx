@@ -3,7 +3,7 @@ import { TodoItem } from './TodoItem';
 export const TodoList = ( { todos = [], onDeleteTodo, onToggleTodo } ) =>
 {
     return (
-        <ul className="list-group">
+        <ul className='list-group'>
             {
                 todos.map( todo => (
                     <TodoItem
